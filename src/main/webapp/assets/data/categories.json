@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Electronics",
+    "description": "Devices and gadgets",
+    "imagePath": "assets/img/Electronics.jpg",
+    "products": [
+      {"name": "Laptop", "price": 999.99, "description": "A high-performance laptop with 16GB RAM and SSD storage", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Smartphone", "price": 799.99, "description": "A sleek smartphone with a crystal-clear display", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Headphones", "price": 199.99, "description": "Noise-cancelling over-ear headphones", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Smartwatch", "price": 249.99, "description": "Track your fitness and notifications on the go", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Bluetooth Speaker", "price": 149.99, "description": "Portable wireless speaker with deep bass", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Tablet", "price": 599.99, "description": "10-inch tablet ideal for entertainment and work", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Gaming Console", "price": 499.99, "description": "Next-gen console for immersive gaming", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Camera", "price": 899.99, "description": "DSLR camera with 24MP sensor and 4K video", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Monitor", "price": 279.99, "description": "27-inch 4K UHD monitor with vivid colors", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Keyboard", "price": 89.99, "description": "Mechanical keyboard with RGB lighting", "imagePath": "assets/img/products/default.jpg"}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Clothes",
+    "description": "Trendy and comfortable apparel",
+    "imagePath": "assets/img/Clothes.jpg",
+    "products": [
+      {"name": "T-Shirt", "price": 29.99, "description": "Soft cotton T-shirt available in various colors", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Jeans", "price": 59.99, "description": "Slim-fit jeans with stretchable fabric", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Jacket", "price": 119.99, "description": "Warm winter jacket with inner lining", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Sneakers", "price": 89.99, "description": "Comfortable sneakers for everyday wear", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Hoodie", "price": 49.99, "description": "Casual hoodie made of organic cotton", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Dress", "price": 109.99, "description": "Elegant evening dress with a modern cut", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Shorts", "price": 34.99, "description": "Light summer shorts for outdoor activities", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Sweater", "price": 69.99, "description": "Knitted sweater for cool weather", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Socks", "price": 9.99, "description": "Pack of 3 soft cotton socks", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Cap", "price": 19.99, "description": "Adjustable cap with stylish design", "imagePath": "assets/img/products/default.jpg"}
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Kitchen-Appliances",
+    "description": "Everything for a cozy home",
+    "imagePath": "assets/img/Kitchen-Appliances.jpg",
+    "products": [
+      {"name": "Coffee Maker", "price": 89.99, "description": "Automatic drip coffee maker with timer", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Microwave Oven", "price": 149.99, "description": "800W microwave with digital display", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Blender", "price": 79.99, "description": "High-speed blender for smoothies and soups", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Vacuum Cleaner", "price": 159.99, "description": "Bagless vacuum cleaner with strong suction", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Toaster", "price": 39.99, "description": "2-slice toaster with browning control", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Air Fryer", "price": 129.99, "description": "Healthy frying with little to no oil", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Cookware Set", "price": 199.99, "description": "10-piece non-stick cookware set", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Electric Kettle", "price": 49.99, "description": "1.7L fast-boil electric kettle", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Iron", "price": 59.99, "description": "Steam iron with ceramic soleplate", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Dish Rack", "price": 24.99, "description": "Stainless steel drying rack for dishes", "imagePath": "assets/img/products/default.jpg"}
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Sports-Outdoors",
+    "description": "Gear for active lifestyles",
+    "imagePath": "assets/img/Sports-Outdoors.jpg",
+    "products": [
+      {"name": "Running Shoes", "price": 119.99, "description": "Lightweight and breathable running shoes", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Yoga Mat", "price": 29.99, "description": "Non-slip yoga mat with carrying strap", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Bicycle", "price": 499.99, "description": "21-speed mountain bike with durable frame", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Tent", "price": 199.99, "description": "2-person waterproof camping tent", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Backpack", "price": 59.99, "description": "Spacious hiking backpack with multiple pockets", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Water Bottle", "price": 19.99, "description": "Stainless steel insulated bottle", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Dumbbell Set", "price": 89.99, "description": "Adjustable dumbbells up to 20kg", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Tennis Racket", "price": 99.99, "description": "Lightweight graphite tennis racket", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Camping Stove", "price": 79.99, "description": "Portable gas stove for outdoor cooking", "imagePath": "assets/img/products/default.jpg"},
+      {"name": "Sleeping Bag", "price": 69.99, "description": "Warm sleeping bag for all seasons", "imagePath": "assets/img/products/default.jpg"}
+    ]
+  }
+]
