@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import org.example.model.Category;
 import org.example.model.Product;
+import org.example.repository.CategoryRepository;
 import org.example.service.CategoryService;
 
 import java.io.File;
@@ -22,31 +23,48 @@ import java.util.List;
 public class AddCategory extends HttpServlet {
 
     private CategoryService categoryService;
+    private CategoryRepository categoryRepository;
 
     @Override
     public void init() throws ServletException {
         super.init();
         categoryService = new CategoryService();
+        categoryRepository = CategoryRepository.getInstance();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getRequestDispatcher("/addCategory.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String name = request.getParameter("name");
         String description = request.getParameter("description");
+        String discountStr = request.getParameter("discount");
 
         if (name == null || name.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/addCategory");
             return;
         }
 
+        // Create new category
         Category category = new Category();
         category.setName(name);
         category.setDescription(description);
+
+        // Set discount if provided
+        if (discountStr != null && !discountStr.isEmpty()) {
+            try {
+                double discount = Double.parseDouble(discountStr);
+                category.setDiscount(discount);
+            } catch (NumberFormatException e) {
+                category.setDiscount(0.0);
+            }
+        }
 
         // Handle category image
         Part imagePart = request.getPart("image");
@@ -60,19 +78,44 @@ public class AddCategory extends HttpServlet {
             category.setImagePath("assets/img/" + fileName);
         }
 
-        // Optional: handle products
+        // Add category first to get its ID
+        categoryService.addCategory(category);
+
+        // Handle products (optional)
         List<Product> products = new ArrayList<>();
         int index = 0;
         while (true) {
             String pname = request.getParameter("products[" + index + "][name]");
             String pprice = request.getParameter("products[" + index + "][price]");
             String pdesc = request.getParameter("products[" + index + "][description]");
+            String pdiscount = request.getParameter("products[" + index + "][discount]");
+
             if (pname == null) break;
 
             double price = 0;
-            try { price = Double.parseDouble(pprice); } catch (NumberFormatException ignored) {}
+            try {
+                price = Double.parseDouble(pprice);
+            } catch (NumberFormatException ignored) {}
 
-            Product p = new Product(pname, price, pdesc);
+            // Create product with ID and category reference
+            Product p = new Product(
+                    categoryRepository.getNextProductId(),
+                    pname,
+                    price,
+                    pdesc,
+                    category.getId()
+            );
+
+            // Set product discount (inherit from category or use specific)
+            if (pdiscount != null && !pdiscount.isEmpty()) {
+                try {
+                    p.setDiscount(Double.parseDouble(pdiscount));
+                } catch (NumberFormatException e) {
+                    p.setDiscount(category.getDiscount());
+                }
+            } else {
+                p.setDiscount(category.getDiscount());
+            }
 
             // Handle product image
             Part pimage = request.getPart("products[" + index + "][image]");
@@ -89,10 +132,9 @@ public class AddCategory extends HttpServlet {
             products.add(p);
             index++;
         }
-        category.setProducts(products);
 
-        // Add category via service
-        categoryService.addCategory(category);
+        // Set products to category
+        category.setProducts(products);
 
         response.sendRedirect(request.getContextPath() + "/categories");
     }

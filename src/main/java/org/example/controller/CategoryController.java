@@ -26,7 +26,7 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // ✅ fetch categories from repository
-        List<Category> categories = repository.getAllCategories();
+        List<Category> categories = repository.findAll();
         request.setAttribute("categories", categories);
 
         // forward to JSP

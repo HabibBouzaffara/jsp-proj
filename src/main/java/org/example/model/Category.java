@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
-
-    private int id; // auto-incremented
+    private int id;
     private String name;
     private String description;
     private List<Product> products;
     private String imagePath;
+    private double discount; // Category-wide discount
 
-    // Constructor with initial products
     public Category(int id, String name, String description, List<Product> products) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.products = products != null ? products : new ArrayList<>();
+        this.discount = 0.0;
 
-        // default image path based on name
         if (name != null && !name.isEmpty()) {
             this.imagePath = "assets/img/" + name.replaceAll("\\s+", "-") + ".jpg";
         } else {
@@ -29,9 +28,10 @@ public class Category {
     public Category() {
         this.products = new ArrayList<>();
         this.imagePath = "assets/img/default.jpg";
+        this.discount = 0.0;
     }
 
-    // ---------- Getters & Setters ----------
+    // Getters & Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -51,4 +51,7 @@ public class Category {
 
     public String getImagePath() { return imagePath; }
     public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+
+    public double getDiscount() { return discount; }
+    public void setDiscount(double discount) { this.discount = discount; }
 }
