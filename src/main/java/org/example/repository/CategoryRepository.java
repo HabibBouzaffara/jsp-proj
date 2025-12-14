@@ -37,7 +37,7 @@ public class CategoryRepository {
 
         Product phone = new Product(nextProductId++, "iPhone 15 Pro", 1199.99,
                 "Latest flagship with A17 Pro chip", electronics.getId());
-        phone.setImagePath("https://images.unsplash.com/photo-1592286927505-2fd0f9447c89?w=400");
+        phone.setImagePath("https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGUlMjBpcGhvbmV8ZW58MHx8MHx8fDA%3D?w=400");
         phone.setDiscount(10.0);
 
         Product headphones = new Product(nextProductId++, "Sony WH-1000XM5", 399.99,

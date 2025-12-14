@@ -188,6 +188,7 @@
           for (Product p : category.getProducts()) {
             request.setAttribute("product", p);
         %>
+
         <jsp:include page="shared/produitCarte.jsp" />
         <%   }
         } else { %>

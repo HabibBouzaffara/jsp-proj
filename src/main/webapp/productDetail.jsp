@@ -116,7 +116,7 @@
         <div class="col-md-6">
             <div class="product-info">
                 <% if (product.getDiscount() > 0) { %>
-                <span class="discount-badge">🔥 <%= String.format("%.0f", product.getDiscount()) %>% OFF</span>
+                <span class="discount-badge"> <%= String.format("%.0f", product.getDiscount()) %>% OFF</span>
                 <% } %>
                 
                 <h1 class="mb-3"><%= product.getName() %></h1>
@@ -146,16 +146,16 @@
                 <div class="mt-4">
                     <h5 class="mb-3">Product Features</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2">✓ High quality materials</li>
-                        <li class="mb-2">✓ Fast shipping available</li>
-                        <li class="mb-2">✓ 30-day return policy</li>
-                        <li class="mb-2">✓ 1-year warranty included</li>
+                        <li class="mb-2"> High quality materials</li>
+                        <li class="mb-2"> Fast shipping available</li>
+                        <li class="mb-2"> 30-day return policy</li>
+                        <li class="mb-2"> 1-year warranty included</li>
                     </ul>
                 </div>
                 
                 <div class="d-grid gap-2 mt-4">
                     <button class="btn btn-add-cart" onclick="addToCart(<%= product.getId() %>)">
-                        🛒 Add to Cart
+                         Add to Cart
                     </button>
                     <a href="categories" class="btn btn-outline-secondary">Continue Shopping</a>
                 </div>

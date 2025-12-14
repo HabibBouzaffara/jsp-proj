@@ -1,9 +1,12 @@
 <%@ page import="org.example.model.Product" %>
 <%
+    Boolean isAdminUser = (Boolean) session.getAttribute("isAdmin");
     Product product = (Product) request.getAttribute("product");
     if (product != null) {
 %>
+
 <div class="card" style="width: 200px; height: 300px;">
+
     <img src="<%= product.getImagePath() %>" class="card-img-top" style="height: 120px; object-fit: cover;" alt="<%= product.getName() %>">
     <div class="card-body d-flex flex-column">
         <h6 class="card-title"><%= product.getName() %></h6>
@@ -30,11 +33,13 @@
                 <input type="hidden" name="categoryId" value="<%= product.getCategoryId() %>">
                 <button type="submit" class="btn btn-primary btn-sm w-100">Add to Cart</button>
             </form>
+            <% if (isAdminUser) { %>
             <form method="post" action="removeProduct">
                 <input type="hidden" name="productId" value="<%= product.getId() %>">
                 <input type="hidden" name="categoryId" value="<%= product.getCategoryId() %>">
                 <button type="submit" class="btn btn-danger btn-sm">x</button>
             </form>
+            <% } %>
         </div>
     </div>
 </div>

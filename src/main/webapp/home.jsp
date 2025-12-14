@@ -129,7 +129,7 @@
     %>
     <!-- Featured Discounts Section -->
     <section class="mb-5">
-        <h2 class="section-title">🔥 Hot Deals</h2>
+        <h2 class="section-title">Hot Deals</h2>
         <div class="row g-4">
             <% for (Product product : discountedProducts) { %>
             <div class="col-md-4">
