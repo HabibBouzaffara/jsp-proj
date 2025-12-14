@@ -39,7 +39,14 @@ public class CartController extends HttpServlet {
 
         if ("add".equals(action)) {
             addToCart(request, cart);
-            response.sendRedirect("categories");
+            String referer = request.getHeader("Referer");
+            if (referer != null && referer.contains("home")) {
+                response.sendRedirect("home");
+            } else if (referer != null && referer.contains("product-detail")) {
+                response.sendRedirect(referer);
+            } else {
+                response.sendRedirect("categories");
+            }
         } else if ("remove".equals(action)) {
             removeFromCart(request, cart);
             response.sendRedirect("cart");
