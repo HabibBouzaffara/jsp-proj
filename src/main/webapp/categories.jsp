@@ -138,6 +138,9 @@
 
 <%
   List<Category> categories = (List<Category>) request.getAttribute("categories");
+  Boolean isAdminUser = (Boolean) session.getAttribute("isAdmin");
+  if (isAdminUser == null) isAdminUser = false;
+  
   if (categories != null && !categories.isEmpty()) {
 %>
 
@@ -145,11 +148,13 @@
 
 <div class="d-flex flex-row gap-3 pb-3 position-relative" style="overflow-x: auto; white-space: nowrap;">
 
-  <!-- FIXED + ADD CATEGORY -->
+  <!-- FIXED + ADD CATEGORY (ADMIN ONLY) -->
+  <% if (isAdminUser) { %>
   <div class="add-card sticky-card px-4" onclick="window.location.href='addCategory'">
     <h1 style="font-size: 60px; margin: 0">+</h1>
     <p class="mt-2 mb-0">Add Category</p>
   </div>
+  <% } %>
 
   <% for (Category category : categories) { %>
   <div style="display: inline-block;">
@@ -170,12 +175,14 @@
     <div id="products-<%= category.getName() %>" class="d-none">
       <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
 
-        <!-- Add Product button -->
+        <!-- Add Product button (ADMIN ONLY) -->
+        <% if (isAdminUser) { %>
         <div class="add-card" style="width:150px; height:200px;"
              onclick="window.location.href='addProduct?category=<%= category.getName() %>'">
           <h1 style="font-size:40px; margin:0;">+</h1>
           <p class="mb-0">Add Product</p>
         </div>
+        <% } %>
 
         <% if (category.getProducts() != null && !category.getProducts().isEmpty()) {
           for (Product p : category.getProducts()) {

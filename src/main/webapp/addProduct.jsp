@@ -1,3 +1,6 @@
+<%@ page import="org.example.model.Category" %>
+<%@ page import="org.example.repository.CategoryRepository" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -19,30 +22,64 @@
 <body>
 <%@ include file="shared/navbar.jsp" %>
 
+<%
+    // Check admin access
+    Boolean isAdminCheck = (Boolean) session.getAttribute("isAdmin");
+    if (isAdminCheck == null || !isAdminCheck) {
+        response.sendRedirect("home");
+        return;
+    }
+    
+    String categoryParam = request.getParameter("category");
+    String categoryNameAttr = (String) request.getAttribute("categoryName");
+    String selectedCategory = categoryParam != null ? categoryParam : categoryNameAttr;
+    
+    CategoryRepository repo = CategoryRepository.getInstance();
+    List<Category> categories = repo.findAll();
+%>
+
 <div class="container">
     <div class="form-container">
         <h2 class="text-center mb-4">Add New Product</h2>
         <form method="post" action="addProduct">
-            <input type="hidden" name="categoryName" value="<%= request.getAttribute("categoryName") %>">
-
             <div class="mb-3">
-                <label class="form-label">Category</label>
-                <input type="text" class="form-control" value="<%= request.getAttribute("categoryName") %>" disabled>
+                <label class="form-label">Category *</label>
+                <select name="categoryName" class="form-control" required>
+                    <option value="">-- Select Category --</option>
+                    <% 
+                        if (categories != null && !categories.isEmpty()) {
+                            for (Category cat : categories) {
+                                boolean isSelected = selectedCategory != null && selectedCategory.equals(cat.getName());
+                    %>
+                    <option value="<%= cat.getName() %>" <%= isSelected ? "selected" : "" %>>
+                        <%= cat.getName() %>
+                    </option>
+                    <% 
+                            }
+                        }
+                    %>
+                </select>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Product Name</label>
+                <label class="form-label">Product Name *</label>
                 <input type="text" name="productName" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Price ($)</label>
+                <label class="form-label">Price ($) *</label>
                 <input type="number" step="0.01" name="price" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Description</label>
+                <label class="form-label">Description *</label>
                 <textarea name="description" class="form-control" rows="3" required></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Image URL</label>
+                <input type="text" name="imageUrl" class="form-control" placeholder="https://images.unsplash.com/...">
+                <small class="text-muted">Optional: Enter an image URL (e.g., from Unsplash)</small>
             </div>
 
             <div class="mb-3">
@@ -52,7 +89,7 @@
 
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary flex-grow-1">Add Product</button>
-                <a href="categories" class="btn btn-secondary">Cancel</a>
+                <a href="admin" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

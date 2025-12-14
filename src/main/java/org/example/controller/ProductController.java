@@ -17,6 +17,13 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Check admin access
+        Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
+        if (isAdmin == null || !isAdmin) {
+            response.sendRedirect("home");
+            return;
+        }
+        
         String categoryName = request.getParameter("category");
         if (categoryName != null) {
             request.setAttribute("categoryName", categoryName);
@@ -27,11 +34,18 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Check admin access
+        Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
+        if (isAdmin == null || !isAdmin) {
+            response.sendRedirect("home");
+            return;
+        }
 
         String categoryName = request.getParameter("categoryName");
         String productName = request.getParameter("productName");
         String priceStr = request.getParameter("price");
         String description = request.getParameter("description");
+        String imageUrl = request.getParameter("imageUrl");
         String discountStr = request.getParameter("discount");
 
         try {
@@ -52,9 +66,14 @@ public class ProductController extends HttpServlet {
                         category.getId()
                 );
                 product.setDiscount(discount);
+                
+                // Set custom image URL if provided
+                if (imageUrl != null && !imageUrl.trim().isEmpty()) {
+                    product.setImagePath(imageUrl);
+                }
 
                 category.getProducts().add(product);
-                response.sendRedirect("categories");
+                response.sendRedirect("admin");
             } else {
                 request.setAttribute("error", "Category not found");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
