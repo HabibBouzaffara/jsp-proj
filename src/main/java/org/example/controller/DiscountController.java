@@ -17,6 +17,13 @@ public class DiscountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Check admin access
+        Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
+        if (isAdmin == null || !isAdmin) {
+            response.sendRedirect("home");
+            return;
+        }
+        
         CategoryRepository repo = CategoryRepository.getInstance();
         request.setAttribute("categories", repo.findAll());
         request.getRequestDispatcher("discount.jsp").forward(request, response);
@@ -25,6 +32,12 @@ public class DiscountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Check admin access
+        Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
+        if (isAdmin == null || !isAdmin) {
+            response.sendRedirect("home");
+            return;
+        }
 
         String type = request.getParameter("type");
         String discountStr = request.getParameter("discount");
