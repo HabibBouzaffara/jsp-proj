@@ -20,6 +20,9 @@
             transition: transform 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             height: 100%;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
         .category-card:hover {
             transform: translateY(-5px);
@@ -36,6 +39,7 @@
             transition: transform 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             height: 100%;
+            cursor: pointer;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -98,6 +102,11 @@
             transform: scale(1.05);
             box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
         }
+        .clickable-product {
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 <body>
@@ -124,19 +133,21 @@
         <div class="row g-4">
             <% for (Product product : discountedProducts) { %>
             <div class="col-md-4">
-                <div class="card product-card position-relative">
-                    <span class="discount-badge">-<%= String.format("%.0f", product.getDiscount()) %>%</span>
-                    <img src="<%= product.getImagePath() %>" class="card-img-top" alt="<%= product.getName() %>" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= product.getName() %></h5>
-                        <p class="card-text text-muted"><%= product.getDescription() %></p>
-                        <div class="price-section mb-3">
-                            <span class="original-price">$<%= String.format("%.2f", product.getPrice()) %></span>
-                            <span class="final-price">$<%= String.format("%.2f", product.getFinalPrice()) %></span>
+                <a href="product-detail?id=<%= product.getId() %>&categoryId=<%= product.getCategoryId() %>" class="clickable-product">
+                    <div class="card product-card position-relative">
+                        <span class="discount-badge">-<%= String.format("%.0f", product.getDiscount()) %>%</span>
+                        <img src="<%= product.getImagePath() %>" class="card-img-top" alt="<%= product.getName() %>" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.getName() %></h5>
+                            <p class="card-text text-muted"><%= product.getDescription() %></p>
+                            <div class="price-section mb-3">
+                                <span class="original-price">$<%= String.format("%.2f", product.getPrice()) %></span>
+                                <span class="final-price">$<%= String.format("%.2f", product.getFinalPrice()) %></span>
+                            </div>
+                            <button class="btn btn-add-cart w-100" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to cart!');">Add to Cart</button>
                         </div>
-                        <button class="btn btn-add-cart w-100">Add to Cart</button>
                     </div>
-                </div>
+                </a>
             </div>
             <% } %>
         </div>
@@ -153,14 +164,15 @@
                     for (Category category : categories) {
             %>
             <div class="col-md-3">
-                <div class="card category-card">
-                    <img src="<%= category.getImagePath() %>" class="card-img-top" alt="<%= category.getName() %>" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title"><%= category.getName() %></h5>
-                        <p class="card-text text-muted"><%= category.getDescription() %></p>
-                        <a href="categories?id=<%= category.getId() %>" class="btn btn-outline-primary">Explore</a>
+                <a href="categories?id=<%= category.getId() %>" class="category-card text-decoration-none">
+                    <div class="card">
+                        <img src="<%= category.getImagePath() %>" class="card-img-top" alt="<%= category.getName() %>" loading="lazy">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-dark"><%= category.getName() %></h5>
+                            <p class="card-text text-muted"><%= category.getDescription() %></p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <% 
                     }
@@ -179,25 +191,27 @@
                     for (Product product : allProducts) {
             %>
             <div class="col-md-3">
-                <div class="card product-card position-relative">
-                    <% if (product.getDiscount() > 0) { %>
-                    <span class="discount-badge">-<%= String.format("%.0f", product.getDiscount()) %>%</span>
-                    <% } %>
-                    <img src="<%= product.getImagePath() %>" class="card-img-top" alt="<%= product.getName() %>" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= product.getName() %></h5>
-                        <p class="card-text text-muted" style="font-size: 14px;"><%= product.getDescription() %></p>
-                        <div class="price-section mb-3">
-                            <% if (product.getDiscount() > 0) { %>
-                            <span class="original-price">$<%= String.format("%.2f", product.getPrice()) %></span>
-                            <span class="final-price">$<%= String.format("%.2f", product.getFinalPrice()) %></span>
-                            <% } else { %>
-                            <span class="final-price">$<%= String.format("%.2f", product.getPrice()) %></span>
-                            <% } %>
+                <a href="product-detail?id=<%= product.getId() %>&categoryId=<%= product.getCategoryId() %>" class="clickable-product">
+                    <div class="card product-card position-relative">
+                        <% if (product.getDiscount() > 0) { %>
+                        <span class="discount-badge">-<%= String.format("%.0f", product.getDiscount()) %>%</span>
+                        <% } %>
+                        <img src="<%= product.getImagePath() %>" class="card-img-top" alt="<%= product.getName() %>" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.getName() %></h5>
+                            <p class="card-text text-muted" style="font-size: 14px;"><%= product.getDescription() %></p>
+                            <div class="price-section mb-3">
+                                <% if (product.getDiscount() > 0) { %>
+                                <span class="original-price">$<%= String.format("%.2f", product.getPrice()) %></span>
+                                <span class="final-price">$<%= String.format("%.2f", product.getFinalPrice()) %></span>
+                                <% } else { %>
+                                <span class="final-price">$<%= String.format("%.2f", product.getPrice()) %></span>
+                                <% } %>
+                            </div>
+                            <button class="btn btn-add-cart w-100" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to cart!');">Add to Cart</button>
                         </div>
-                        <button class="btn btn-add-cart w-100">Add to Cart</button>
                     </div>
-                </div>
+                </a>
             </div>
             <% 
                     }

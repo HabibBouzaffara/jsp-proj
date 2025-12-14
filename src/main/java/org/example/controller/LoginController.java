@@ -31,6 +31,8 @@ public class LoginController extends HttpServlet {
 
         if (user.isPresent()) {
             request.getSession().setAttribute("fullname", user.get().getFullname());
+            request.getSession().setAttribute("isAdmin", user.get().isAdmin());
+            request.getSession().setAttribute("email", user.get().getEmail());
             response.sendRedirect("home");
         } else {
             response.sendRedirect("error.jsp");

@@ -4,7 +4,11 @@
     <link rel="stylesheet" href="./libraries/bootstrap/bootstrap.min.css">
 </head>
 <body>
-<% String fullname = (String) session.getAttribute("fullname"); %>
+<% 
+    String fullname = (String) session.getAttribute("fullname"); 
+    Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+    if (isAdmin == null) isAdmin = false;
+%>
 
 <nav class="navbar navbar-expand-lg bg-light shadow-sm p-3 mb-4">
     <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -22,13 +26,15 @@
                 <span class="badge bg-danger"><%= cartCount %></span>
                 <% } %>
             </a>
-            <a class="nav-link text-dark fw-semibold" href="discount">
-                <span class="badge bg-purple" style="background-color: #764ba2;">Admin</span>
+            <% if (isAdmin) { %>
+            <a class="nav-link text-dark fw-semibold" href="admin">
+                <span class="badge bg-purple" style="background-color: #764ba2;">Admin Panel</span>
             </a>
+            <% } %>
         </div>
 
         <% if (fullname != null) { %>
-        <span class="navbar-text text-secondary fw-bold">👤 <%= fullname %></span>
+        <span class="navbar-text text-secondary fw-bold">👤 <%= fullname %> <%= isAdmin ? "(Admin)" : "" %></span>
         <% } %>
     </div>
 </nav>

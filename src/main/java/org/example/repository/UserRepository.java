@@ -9,9 +9,10 @@ import java.util.function.Predicate;
 public class UserRepository {
 
     private static List<User> users = List.of(
-            new User("habibbouzo21@gmail.com", "123456", "Habib Bouzoffara"),
-            new User("test.test@gmail.com", "123456", "test"),
-            new User("1","1","habib"));
+            new User("admin@store.com", "admin123", "Admin User", true),
+            new User("habibbouzo21@gmail.com", "123456", "Habib Bouzoffara", false),
+            new User("test.test@gmail.com", "123456", "Test User", false),
+            new User("1","1","Habib", false));
 
     public UserRepository() {
     }

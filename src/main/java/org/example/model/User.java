@@ -5,15 +5,22 @@ public class User {
     private String email;
     private String password;
     private String fullname;
+    private boolean isAdmin;
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.isAdmin = false;
     }
 
     public User(String email, String password, String fullname) {
         this(email, password);
         this.fullname = fullname;
+    }
+
+    public User(String email, String password, String fullname, boolean isAdmin) {
+        this(email, password, fullname);
+        this.isAdmin = isAdmin;
     }
 
     public String getEmail() {
@@ -38,5 +45,13 @@ public class User {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
